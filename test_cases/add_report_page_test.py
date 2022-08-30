@@ -5,13 +5,14 @@ import time
 from selenium import webdriver
 
 from pages.dashboard import Dashboard
-from pages.add_player import AddPlayer
+from pages.add_report import AddReport
+from pages.edit_player import EditPlayer
 from pages.login_page import LoginPage
 from utils.settings import DRIVER_PATH, IMPLICITLY_WAIT
 from selenium.webdriver.chrome.service import Service
 
 
-class TestAddPlayer(unittest.TestCase):
+class TestAddingReport(unittest.TestCase):
 
     @classmethod
     def setUp(self):
@@ -22,41 +23,25 @@ class TestAddPlayer(unittest.TestCase):
         self.driver.fullscreen_window()
         self.driver.implicitly_wait(IMPLICITLY_WAIT)
 
-    def test_add_player(self):
+    def test_editing_player(self):
         user_login = LoginPage(self.driver)
         user_login.type_in_email('user07@getnada.com')
         user_login.type_in_password('Test-1234')
         user_login.click_on_the_sign_in_button()
         dashboard_page = Dashboard(self.driver)
-        dashboard_page.click_on_the_add_player_button()
-        new_player = AddPlayer(self.driver)
-        new_player.type_in_first_name('Halyna')
-        new_player.type_in_surname('Horyn')
-        new_player.type_in_age('19041999')
-        new_player.type_in_main_position('goalkeeper')
-        new_player.click_on_the_submit_button()
+        dashboard_page.click_on_the_players_button()
+        edit_player_page = EditPlayer(self.driver)
+        edit_player_page.click_on_the_search_button()
+        edit_player_page.find_the_player()
+        edit_player_page.click_on_the_given_player()
+        reports_page = AddReport(self.driver)
+        reports_page.click_on_the_reports_button()
+        reports_page.click_on_the_add_report_button()
+        reports_page.click_on_the_create_report_button()
+        reports_page.click_on_the_submit_button()
         time.sleep(5)
 
     @classmethod
     def tearDown(self):
         self.driver.quit()
 
-
-
-
-
-
-
-
-
-
-
-
-
-# for now we have this no age test which runs successfully. However, we need to figure out how
-# Test case 1: we leave blank one field. Success. also try to find a solution for right/left leg
-# Test case2: we leave blank all the fields. Success.
-# Test Case 3: we fill in all the fields.
-# Test case 4: logout functionality
-# Test case 5:
-        #new_player.assert_the_error_message_text()
