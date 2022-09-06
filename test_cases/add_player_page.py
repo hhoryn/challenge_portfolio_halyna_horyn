@@ -40,23 +40,3 @@ class TestAddPlayer(unittest.TestCase):
     @classmethod
     def tearDown(self):
         self.driver.quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-# for now we have this no age test which runs successfully. However, we need to figure out how
-# Test case 1: we leave blank one field. Success. also try to find a solution for right/left leg
-# Test case2: we leave blank all the fields. Success.
-# Test Case 3: we fill in all the fields.
-# Test case 4: logout functionality
-# Test case 5:
-        #new_player.assert_the_error_message_text()
